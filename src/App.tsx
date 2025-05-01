@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './App.css'
-import HIDDeivcesList from "./HIDDeviceList.tsx";
+import HIDDeivcesList from "./HIDDeviceInterfaceSelector.tsx";
 import {HIDDevice} from "./model/HIDDevice.tsx";
 import {DeviceHelper} from "./core/DeviceHelper.tsx";
 

@@ -90,7 +90,7 @@ const AutoSelectButton = styled.button`
     }
 `;
 
-const HIDDeviceList = ({
+const HIDDeviceInterfaceSelector = ({
                            onStartFetching,
                             onFinishedFetching,
                            onDeviceSelected,
@@ -145,11 +145,11 @@ const HIDDeviceList = ({
             ))}
             {devices.length > 0 && (
                 <AutoSelectButton onClick={onClickedAutoSelect} aria-label="Auto select HID device">
-                    自动选择正确的 HID 设备
+                    自动选择正确的 HID 子设备(接口)
                 </AutoSelectButton>
             )}
         </DeviceList>
     );
 };
 
-export default HIDDeviceList;
+export default HIDDeviceInterfaceSelector;
