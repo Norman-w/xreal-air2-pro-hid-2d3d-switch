@@ -60,7 +60,8 @@ function App() {
         if (currentConnectedInterface) {
             console.info("发送3D模式命令")
             const command = buildCustomDisplayCommand({msgId:0x004})
-            console.info("3D模式命令:", command)
+            const commandHexString = Array.from(command).map((byte) => byte.toString(16).padStart(2, '0')).join(' ')
+            console.info("3D模式命令:", commandHexString)
             currentConnectedInterface.send(command)
             setMode('3D')
             setButtonText('当前工作在3D模式')
