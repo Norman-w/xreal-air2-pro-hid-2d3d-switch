@@ -58,7 +58,7 @@ function App() {
     const [buttonText, setButtonText] = useState('当前工作在2D模式')
     const handleSwitchTo3D = () => {
         if (currentConnectedInterface) {
-            const command = buildCustomDisplayCommand({msgId:0x008})
+            const command = buildCustomDisplayCommand({msgId:0x008, mode: 3})
             currentConnectedInterface.send(command)
             setMode('3D')
             setButtonText('当前工作在3D模式')
