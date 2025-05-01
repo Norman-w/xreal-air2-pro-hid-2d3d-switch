@@ -114,8 +114,9 @@ export class HIDDevice {
         /// const {reportId, data} = event;
         const {data} = event;
         const dataView = new Uint8Array(data.buffer);
+        const dataViewHex = Array.from(dataView).map((byte) => byte.toString(16).padStart(2, '0')).join(' ');
 
-        console.log("收到HID数据报告:", dataView);
+        console.log("收到HID数据报告:", dataViewHex);
         
         this.lastReport = dataView;
         this.lastReportTimestamp = Date.now();
