@@ -59,10 +59,19 @@ function App() {
     const handleSwitchTo3D = () => {
         if (currentConnectedInterface) {
             console.info("发送3D模式命令")
-            const command = buildCustomDisplayCommand({msgId:0x004})
+            const command = buildCustomDisplayCommand({msgId:0x008})
             const commandHexString = Array.from(command).map((byte) => byte.toString(16).padStart(2, '0')).join(' ')
             console.info("3D模式命令:", commandHexString)
             currentConnectedInterface.send(command)
+
+            // //region 复刻已经可以实现的命令验证发送底层逻辑正确性,但这个命令指示切换回正确的2D模式并非3D模式,发送有效时会触发XREAL屏幕的变化(黑屏或刷新)
+            // let testCommandHexString = "fd 95 3a cf a8 12 00 4f 21 8b 83 00 00 00 00 08 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
+            // const commandUint8Array = new Uint8Array(testCommandHexString.split(' ').map((byte) => parseInt(byte, 16)))
+            // testCommandHexString = Array.from(commandUint8Array).map((byte) => byte.toString(16).padStart(2, '0')).join(' ')
+            // console.info("3D模式命令:", testCommandHexString)
+            //
+            // currentConnectedInterface.send(commandUint8Array)
+            // //endregion
             setMode('3D')
             setButtonText('当前工作在3D模式')
         }

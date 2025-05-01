@@ -166,7 +166,7 @@ export class HIDDevice {
     send(command: Uint8Array<ArrayBuffer>) {
         if (this.originalInstance) {
             // console.log("发送HID数据报告:", command);
-            // this.originalInstance.sendReport(0, command);
+            this.originalInstance.sendReport(0, command);
         } else {
             console.error("原始实例不存在,无法发送数据");
         }
