@@ -1,5 +1,5 @@
 import {HIDDevice} from "../model/HIDDevice.tsx";
-import {sendCommand, sendNrealCommand} from "../glasses_io.tsx";
+import {sendCommand, sendNrealCommand} from "./glasses_io.tsx";
 
 export class DeviceHelper {
     // Static method to monitor and validate devices
