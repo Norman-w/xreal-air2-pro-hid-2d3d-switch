@@ -66,7 +66,8 @@ function App() {
     }
     const handleSwitchTo2D = () => {
         if (currentConnectedInterface) {
-            // currentConnectedInterface.sendReport(0, new Uint8Array([0x00, 0x00, 0x00, 0x00]))
+            const command = buildCustomDisplayCommand({msgId:0x008, mode: 1})
+            currentConnectedInterface.send(command)
             setMode('2D')
             setButtonText('当前工作在2D模式')
         }
