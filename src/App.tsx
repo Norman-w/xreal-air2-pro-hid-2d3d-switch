@@ -4,6 +4,7 @@ import HIDDeviceInterfaceSelector from "./HIDDeviceInterfaceSelector.tsx";
 import {HIDDevice} from "./model/HIDDevice.tsx";
 import {DeviceHelper} from "./core/DeviceHelper.tsx";
 import styled from "styled-components";
+import {buildCustomDisplayCommand} from "./core/command_builder.tsx";
 
 const SwitchTo3DButton = styled.button`
     font-size: 44px;
@@ -57,7 +58,10 @@ function App() {
     const [buttonText, setButtonText] = useState('当前工作在2D模式')
     const handleSwitchTo3D = () => {
         if (currentConnectedInterface) {
-            // currentConnectedInterface.sendReport(0, new Uint8Array([0x01, 0x00, 0x00, 0x00]))
+            console.info("发送3D模式命令")
+            const command = buildCustomDisplayCommand({msgId:0x004})
+            console.info("3D模式命令:", command)
+            currentConnectedInterface.send(command)
             setMode('3D')
             setButtonText('当前工作在3D模式')
         }
@@ -98,9 +102,12 @@ function App() {
                                     alert('找到多个有效的设备,请手动选择一个')
                                 }
                                 // setDevice(devices[0])
-                                console.info("自动选择的设备:", devices[0])
+                                const destDevice = devices[0]
+                                console.info("自动选择的设备:", destDevice)
                                 setConnected(true)
-                                setCurrentConnectedInterface(devices[0])
+                                setCurrentConnectedInterface(destDevice)
+                                destDevice.startListening()
+                                console.info("开始监听设备数据")
                             } else {
                                 alert('没有找到有效的设备')
                             }

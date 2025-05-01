@@ -19,6 +19,8 @@ interface HIDDeviceOriginal {
     addEventListener: (eventName: string, callback: (event: any) => void) => void;
     removeEventListener: (eventName: string, callback: (event: any) => void) => void;
     hasListener?: boolean;
+
+    sendReport(number: number, command: Uint8Array<ArrayBuffer>): void;
 }
 
 export class HIDDevice {
@@ -113,7 +115,7 @@ export class HIDDevice {
         const {data} = event;
         const dataView = new Uint8Array(data.buffer);
 
-        // console.log("收到HID数据报告:", dataView);
+        console.log("收到HID数据报告:", dataView);
         
         this.lastReport = dataView;
         this.lastReportTimestamp = Date.now();
@@ -158,5 +160,14 @@ export class HIDDevice {
     // 获取最后报告时间戳
     public getLastReportTimestamp(): number | null {
         return this.lastReportTimestamp;
+    }
+
+    send(command: Uint8Array<ArrayBuffer>) {
+        if (this.originalInstance) {
+            // console.log("发送HID数据报告:", command);
+            // this.originalInstance.sendReport(0, command);
+        } else {
+            console.error("原始实例不存在,无法发送数据");
+        }
     }
 }

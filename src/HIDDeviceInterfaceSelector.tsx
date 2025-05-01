@@ -30,17 +30,17 @@ const DeviceInfo = styled.span`
 `;
 
 const FetchButton = styled.button`
-    padding: 8px 16px;
     margin-bottom: 16px;
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
+    border-radius: 14px;
+    background-color: #0056b3;
     color: #fff;
-    font-size: 14px;
+    font-size: 33px;
     cursor: pointer;
+    padding: 100px;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #007bff;
     }
 `;
 
@@ -125,7 +125,8 @@ const HIDDeviceInterfaceSelector = ({
 
     return (
         <DeviceList>
-            <FetchButton onClick={handleFetchDevices} aria-label="Fetch HID devices">
+            {/*一旦有了设备列表以后,这个按钮的style就会变成padding为5px, 字体伪14px了*/}
+            <FetchButton onClick={handleFetchDevices} aria-label="Fetch HID devices" style={{padding: devices.length > 0 ? '5px' : '100px', fontSize: devices.length > 0 ? '14px' : '33px'}}>
                 选择 HID 设备
             </FetchButton>
             {devices.map((device, index) => (
